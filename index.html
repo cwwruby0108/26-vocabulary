@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z 兒童英語互動學習圖卡 - Warm Cream Style</title>
     
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Google Fonts: Fredoka & Quicksand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&family=Quicksand:wght=400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Material Icons (用於替換圖片) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
     <style>
         body {
@@ -44,6 +49,7 @@
 </head>
 <body class="min-h-screen text-[#5C6B73] selection:bg-[#E07A5F]/20 overflow-x-hidden flex flex-col justify-between">
 
+    <!-- 頂部導覽列 -->
     <header class="w-full max-w-6xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-[#E07A5F] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#E07A5F]/20">
@@ -57,6 +63,7 @@
             </div>
         </div>
 
+        <!-- 模式切換按鈕組 -->
         <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-2xl border border-[#F4F1DE] shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex gap-2">
             <button onclick="switchTab('flashcards')" id="tab-flashcards" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/15">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7v12m0 0l-4-4m4 4l4-4m0 6V7m0 0l-4 4m4-4l4 4"/></svg>
@@ -73,16 +80,20 @@
         </div>
     </header>
 
+    <!-- 主要內容區 -->
     <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col justify-center items-center py-4">
         
+        <!-- ======================= 1. 圖卡學習模式 ======================= -->
         <section id="panel-flashcards" class="w-full flex flex-col items-center gap-6 animate-fade-in">
             
             <div class="w-full max-w-4xl flex flex-col items-center text-center gap-3">
+                <!-- 字母置中大標題 -->
                 <div class="space-y-1">
                     <h2 class="text-6xl md:text-7xl font-black text-[#E07A5F] font-['Fredoka'] tracking-wider" id="card-letter-title">Aa</h2>
                     <span class="text-sm font-bold bg-[#FAF8F5] border border-[#F4F1DE] text-[#3D5A80]/60 px-4 py-1 rounded-full" id="card-index">01 / 26</span>
                 </div>
 
+                <!-- 語速與自動播放控制 -->
                 <div class="flex items-center gap-4 mt-2">
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="autoplay-toggle" class="sr-only peer" onchange="toggleAutoplay()">
@@ -102,15 +113,19 @@
             </div>
 
             <div class="w-full flex justify-center items-center gap-2 md:gap-6 max-w-5xl">
+                <!-- 上一張按鈕 -->
                 <button onclick="prevCard()" class="w-12 h-12 rounded-full bg-white border border-[#F4F1DE] text-[#3D5A80] hover:text-[#E07A5F] flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all duration-200 shrink-0 group" aria-label="Previous card">
                     <svg class="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
 
+                <!-- 雙圖卡並排區域 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl" id="cards-grid">
                     
+                    <!-- 卡片 1 (單字一) -->
                     <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer" id="swipe-container-1">
                         <div id="flashcard-left" onclick="flipCard('left')" class="w-full h-full preserve-3d duration-700 ease-out-back relative rounded-3xl shadow-[0_12px_40px_rgba(112,102,90,0.06)] bg-white border border-[#F4F1DE]">
                             
+                            <!-- 卡片 1 正面 -->
                             <div class="absolute inset-0 w-full h-full backface-hidden rounded-3xl p-5 flex flex-col justify-between overflow-hidden bg-white">
                                 <div class="flex justify-end items-start">
                                     <button onclick="event.stopPropagation(); playSpeech(0)" class="w-10 h-10 rounded-full bg-[#E07A5F]/10 hover:bg-[#E07A5F] text-[#E07A5F] hover:text-white flex items-center justify-center transition-all duration-300 active:scale-90 shadow-sm" title="聽聽發音">
@@ -120,7 +135,8 @@
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
                                     <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
-                                        <img id="card-image-left" src="" alt="" class="max-w-full max-h-full object-contain rounded-xl transition-all duration-300 opacity-0" onload="this.classList.remove('opacity-0')" onerror="handleImageError(this)">
+                                        <!-- 用 Material Icon 替換 Img -->
+                                        <span id="card-icon-left" class="material-icons-round text-8xl md:text-9xl text-[#E07A5F] select-none">apple</span>
                                     </div>
                                 </div>
 
@@ -132,6 +148,7 @@
                                 </div>
                             </div>
 
+                            <!-- 卡片 1 背面 -->
                             <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl p-5 flex flex-col justify-between bg-white overflow-hidden">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm font-bold text-[#3D5A80]">學習卡</span>
@@ -154,9 +171,11 @@
                         </div>
                     </div>
 
+                    <!-- 卡片 2 (單字二) -->
                     <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer" id="swipe-container-2">
                         <div id="flashcard-right" onclick="flipCard('right')" class="w-full h-full preserve-3d duration-700 ease-out-back relative rounded-3xl shadow-[0_12px_40px_rgba(112,102,90,0.06)] bg-white border border-[#F4F1DE]">
                             
+                            <!-- 卡片 2 正面 -->
                             <div class="absolute inset-0 w-full h-full backface-hidden rounded-3xl p-5 flex flex-col justify-between overflow-hidden bg-white">
                                 <div class="flex justify-end items-start">
                                     <button onclick="event.stopPropagation(); playSpeech(1)" class="w-10 h-10 rounded-full bg-[#E07A5F]/10 hover:bg-[#E07A5F] text-[#E07A5F] hover:text-white flex items-center justify-center transition-all duration-300 active:scale-90 shadow-sm" title="聽聽發音">
@@ -166,7 +185,8 @@
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
                                     <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
-                                        <img id="card-image-right" src="" alt="" class="max-w-full max-h-full object-contain rounded-xl transition-all duration-300 opacity-0" onload="this.classList.remove('opacity-0')" onerror="handleImageError(this)">
+                                        <!-- 用 Material Icon 替換 Img -->
+                                        <span id="card-icon-right" class="material-icons-round text-8xl md:text-9xl text-[#E07A5F] select-none">bug_report</span>
                                     </div>
                                 </div>
 
@@ -178,6 +198,7 @@
                                 </div>
                             </div>
 
+                            <!-- 卡片 2 背面 -->
                             <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl p-5 flex flex-col justify-between bg-white overflow-hidden">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm font-bold text-[#3D5A80]">學習卡</span>
@@ -202,22 +223,27 @@
 
                 </div>
 
+                <!-- 下一張按鈕 -->
                 <button onclick="nextCard()" class="w-12 h-12 rounded-full bg-white border border-[#F4F1DE] text-[#3D5A80] hover:text-[#E07A5F] flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all duration-200 shrink-0 group" aria-label="Next card">
                     <svg class="w-6 h-6 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
 
+            <!-- 進度條 -->
             <div class="w-full max-w-md bg-white rounded-full h-3 border border-[#F4F1DE] overflow-hidden p-0.5 shadow-sm">
                 <div id="progress-bar" class="bg-[#E07A5F] h-full rounded-full transition-all duration-500 ease-out" style="width: 3.84%"></div>
             </div>
 
+            <!-- 字母快速跳轉 Grid -->
             <div class="w-full max-w-4xl bg-white/60 rounded-3xl p-6 border border-[#F4F1DE] shadow-sm">
                 <h3 class="text-xs font-bold text-[#5C6B73]/60 mb-4 tracking-wider text-center">字母快捷跳轉 A - Z</h3>
                 <div id="alphabet-grid">
-                    </div>
+                    <!-- JavaScript 動態產生 -->
+                </div>
             </div>
         </section>
 
+        <!-- ======================= 2. 趣味問答模式 ======================= -->
         <section id="panel-quiz" class="w-full max-w-xl mx-auto flex-col items-center gap-6 hidden animate-fade-in">
             <div class="w-full flex justify-between items-center px-2">
                 <div class="flex items-center gap-2">
@@ -232,13 +258,14 @@
 
             <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
                 <div class="text-center space-y-1">
-                    <p class="text-xs font-bold text-[#5C6B73]/50">請選出正確的單字圖片</p>
+                    <p class="text-xs font-bold text-[#5C6B73]/50">請選出正確的單字圖標</p>
                     <h3 class="text-3xl font-extrabold text-[#3D5A80]" id="quiz-question-word">apple</h3>
                     <p class="text-sm font-bold text-[#E07A5F]" id="quiz-question-letter">對應哪一個字母呢？</p>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4 w-full" id="quiz-options-container">
-                    </div>
+                    <!-- 動態由 JS 產生 -->
+                </div>
 
                 <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="w-full py-4 rounded-2xl bg-[#3D5A80] text-white font-bold hover:bg-[#3D5A80]/90 active:scale-98 transition-all duration-200 flex items-center justify-center gap-2 shadow-md hidden">
                     下一題
@@ -247,6 +274,7 @@
             </div>
         </section>
 
+        <!-- ======================= 3. 拼寫挑戰模式 ======================= -->
         <section id="panel-spell" class="w-full max-w-xl mx-auto flex-col items-center gap-6 hidden animate-fade-in">
             <div class="w-full flex justify-between items-center px-2">
                 <span class="text-sm font-bold text-[#3D5A80]/70">拼寫大作戰</span>
@@ -255,7 +283,8 @@
 
             <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
                 <div class="relative w-40 h-40 bg-[#FAF8F5] rounded-2xl p-2 border border-[#F4F1DE] flex items-center justify-center">
-                    <img id="spell-image" src="" alt="Spell object" class="max-w-full max-h-full object-contain rounded-xl" onerror="handleImageError(this)">
+                    <!-- 拼寫模式也換成大 Icon -->
+                    <span id="spell-icon" class="material-icons-round text-7xl text-[#E07A5F] select-none">apple</span>
                 </div>
 
                 <div class="text-center space-y-1">
@@ -266,7 +295,8 @@
 
                 <div class="w-full space-y-4">
                     <div class="flex justify-center gap-2 flex-wrap" id="spell-slots-container">
-                        </div>
+                        <!-- 動態字母空格 -->
+                    </div>
 
                     <input type="text" id="spell-hidden-input" class="absolute opacity-0 -z-10" autocomplete="off" autofocus>
                     
@@ -288,16 +318,19 @@
                 </div>
 
                 <div id="spell-feedback" class="w-full text-center font-bold text-sm py-2 px-4 rounded-xl hidden">
-                    </div>
+                    <!-- 顯示正誤狀態 -->
+                </div>
             </div>
         </section>
 
     </main>
 
+    <!-- 底部資訊 -->
     <footer class="w-full py-6 text-center text-xs font-bold text-[#5C6B73]/50 border-t border-[#F4F1DE] mt-8 bg-white/40">
         <p>© 2026 A-Z Educational Flashcards. All Rights Reserved. Designed with Love.</p>
     </footer>
 
+    <!-- 慶祝彈窗 Modal -->
     <div id="congrats-modal" class="fixed inset-0 bg-[#3D5A80]/40 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full mx-6 text-center border border-[#F4F1DE] shadow-2xl transform scale-95 transition-transform duration-300">
             <div class="w-20 h-20 bg-[#F4F1DE] text-[#E07A5F] rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-bounce">
@@ -311,194 +344,194 @@
         </div>
     </div>
 
+    <!-- ======================= JAVASCRIPT ======================= -->
     <script>
-        // 52個為小朋友精選的高解析度、主題精確、乾淨純色背景的 A-Z 雙單字資料集（圖片完全校正版本）
+        // 全數替換成 Google Material Icons 設計編碼，完全避免圖片連結錯亂或失聯問題
         const cardData = [
             {
                 letter: "Aa",
                 words: [
-                    { word: "Apple", phonetic: "æpl", translation: "蘋果", image: "https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Ant", phonetic: "ænt", translation: "螞蟻", image: "https://images.unsplash.com/photo-1614214224054-97216a627a19?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Apple", phonetic: "æpl", translation: "蘋果", icon: "apple" },
+                    { word: "Ant", phonetic: "ænt", translation: "螞蟻", icon: "bug_report" }
                 ]
             },
             {
                 letter: "Bb",
                 words: [
-                    { word: "Banana", phonetic: "bəˈnænə", translation: "香蕉", image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Ball", phonetic: "bɔl", translation: "球", image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Banana", phonetic: "bəˈnænə", translation: "香蕉", icon: "breakfast_dining" },
+                    { word: "Ball", phonetic: "bɔl", translation: "球", icon: "sports_volleyball" }
                 ]
             },
             {
                 letter: "Cc",
                 words: [
-                    { word: "Cat", phonetic: "kæt", translation: "貓咪", image: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Cup", phonetic: "kʌp", translation: "杯子", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Cat", phonetic: "kæt", translation: "貓咪", icon: "pets" },
+                    { word: "Cup", phonetic: "kʌp", translation: "杯子", icon: "local_cafe" }
                 ]
             },
             {
                 letter: "Dd",
                 words: [
-                    { word: "Dog", phonetic: "dɔɡ", translation: "小狗", image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Doll", phonetic: "dɑl", translation: "洋娃娃", image: "https://images.unsplash.com/photo-1559251606-c623743a6d76?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Dog", phonetic: "dɔɡ", translation: "小狗", icon: "bedroom_child" },
+                    { word: "Doll", phonetic: "dɑl", translation: "洋娃娃", icon: "face" }
                 ]
             },
             {
                 letter: "Ee",
                 words: [
-                    { word: "Egg", phonetic: "ɛɡ", translation: "雞蛋", image: "https://images.unsplash.com/photo-1587486913049-53fc88980cfc?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Eraser", phonetic: "ɪˈresɚ", translation: "橡皮擦", image: "https://images.unsplash.com/photo-1603533866386-8d6961ca3fb6?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Egg", phonetic: "ɛɡ", translation: "雞蛋", icon: "egg" },
+                    { word: "Eraser", phonetic: "ɪˈresɚ", translation: "橡皮擦", icon: "auto_fix_normal" }
                 ]
             },
             {
                 letter: "Ff",
                 words: [
-                    { word: "Fish", phonetic: "fɪʃ", translation: "魚兒", image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Frog", phonetic: "frɑɡ", translation: "青蛙", image: "https://images.unsplash.com/photo-1604136172494-b1eb217ec165?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Fish", phonetic: "fɪʃ", translation: "魚兒", icon: "set_meal" },
+                    { word: "Frog", phonetic: "frɑɡ", translation: "青蛙", icon: "cruelty_free" }
                 ]
             },
             {
                 letter: "Gg",
                 words: [
-                    { word: "Girl", phonetic: "ɡɝl", translation: "女孩", image: "https://images.unsplash.com/photo-1602030028438-4cf153cbae9e?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Goat", phonetic: "ɡot", translation: "山羊", image: "https://images.unsplash.com/photo-1613589417387-95d46f5c8e31?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Girl", phonetic: "ɡɝl", translation: "女孩", icon: "face_3" },
+                    { word: "Goat", phonetic: "ɡot", translation: "山羊", icon: "scuba_diving" } // 無山羊圖標時的趣味替代
                 ]
             },
             {
                 letter: "Hh",
                 words: [
-                    { word: "Hand", phonetic: "hænd", translation: "手掌", image: "https://images.unsplash.com/photo-1590649880765-91b1956b8276?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Hat", phonetic: "hæt", translation: "帽子", image: "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Hand", phonetic: "hænd", translation: "手掌", icon: "front_hand" },
+                    { word: "Hat", phonetic: "hæt", translation: "帽子", icon: "workspace_premium" }
                 ]
             },
             {
                 letter: "Ii",
                 words: [
-                    { word: "Ink", phonetic: "ɪŋk", translation: "墨水", image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Ice", phonetic: "aɪs", translation: "冰塊", image: "https://images.unsplash.com/photo-1551814316-229f381cd09d?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Ink", phonetic: "ɪŋk", translation: "墨水", icon: "colorize" },
+                    { word: "Ice", phonetic: "aɪs", translation: "冰塊", icon: "icecream" }
                 ]
             },
             {
                 letter: "Jj",
                 words: [
-                    { word: "Juice", phonetic: "dʒus", translation: "果汁", image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Jet", phonetic: "dʒɛt", translation: "噴射機", image: "https://images.unsplash.com/photo-1519074069444-1ba4fffb6548?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Juice", phonetic: "dʒus", translation: "果汁", icon: "blender" },
+                    { word: "Jet", phonetic: "dʒɛt", translation: "噴射機", icon: "flight" }
                 ]
             },
             {
                 letter: "Kk",
                 words: [
-                    { word: "Kite", phonetic: "kaɪt", translation: "風箏", image: "https://images.unsplash.com/photo-1510146740409-f86a9f478a05?auto=format&fit=crop&w=600&q=80" },
-                    { word: "King", phonetic: "kɪŋ", translation: "國王", image: "https://images.unsplash.com/photo-1599599810694-b5b37304c041?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Kite", phonetic: "kaɪt", translation: "風箏", icon: "sailing" },
+                    { word: "King", phonetic: "kɪŋ", translation: "國王", icon: "military_tech" }
                 ]
             },
             {
                 letter: "Ll",
                 words: [
-                    { word: "Lion", phonetic: "ˈlaɪən", translation: "獅子", image: "https://images.unsplash.com/photo-1614027164847-1b2809eb7b9b?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Leg", phonetic: "lɛɡ", translation: "腿", image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Lion", phonetic: "ˈlaɪən", translation: "獅子", icon: "gavel" }, 
+                    { word: "Leg", phonetic: "lɛɡ", translation: "腿", icon: "accessibility" }
                 ]
             },
             {
                 letter: "Mm",
                 words: [
-                    { word: "Monkey", phonetic: "ˈmʌŋki", translation: "猴子", image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Milk", phonetic: "mɪlk", translation: "牛奶", image: "https://images.unsplash.com/photo-1553456558-aff63285bdd1?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Monkey", phonetic: "ˈmʌŋki", translation: "猴子", icon: "smart_toy" },
+                    { word: "Milk", phonetic: "mɪlk", translation: "牛奶", icon: "water_drop" }
                 ]
             },
             {
                 letter: "Nn",
                 words: [
-                    { word: "Nut", phonetic: "nʌt", translation: "堅果", image: "https://images.unsplash.com/photo-1606923829579-0ae9f1a9bf69?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Nose", phonetic: "noz", translation: "鼻子", image: "https://images.unsplash.com/photo-1584614454753-43efd9467664?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Nut", phonetic: "nʌt", translation: "堅果", icon: "eco" },
+                    { word: "Nose", phonetic: "noz", translation: "鼻子", icon: "theater_comedy" }
                 ]
             },
             {
                 letter: "Oo",
                 words: [
-                    { word: "Ox", phonetic: "ɑks", translation: "公牛", image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Owl", phonetic: "aʊl", translation: "貓頭鷹", image: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Ox", phonetic: "ɑks", translation: "公牛", icon: "agriculture" },
+                    { word: "Owl", phonetic: "aʊl", translation: "貓頭鷹", icon: "visibility" }
                 ]
             },
             {
                 letter: "Pp",
                 words: [
-                    { word: "Pig", phonetic: "pɪɡ", translation: "小豬", image: "https://images.unsplash.com/photo-1604848698030-c434ba08ece1?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Pen", phonetic: "pɛn", translation: "鋼筆", image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Pig", phonetic: "pɪɡ", translation: "小豬", icon: "savings" },
+                    { word: "Pen", phonetic: "pɛn", translation: "鋼筆", icon: "edit" }
                 ]
             },
             {
                 letter: "Qq",
                 words: [
-                    { word: "Queen", phonetic: "kwin", translation: "皇后", image: "https://images.unsplash.com/photo-1571816119001-c887201777bc?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Quiet", phonetic: "ˈkwaɪət", translation: "安靜", image: "https://images.unsplash.com/photo-1622919927918-0f04e178fa81?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Queen", phonetic: "kwin", translation: "皇后", icon: "castle" },
+                    { word: "Quiet", phonetic: "ˈkwaɪət", translation: "安靜", icon: "volume_off" }
                 ]
             },
             {
                 letter: "Rr",
                 words: [
-                    { word: "Ring", phonetic: "rɪŋ", translation: "戒指", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Rabbit", phonetic: "ˈræbɪt", translation: "兔子", image: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Ring", phonetic: "rɪŋ", translation: "戒指", icon: "blur_circular" },
+                    { word: "Rabbit", phonetic: "ˈræbɪt", translation: "兔子", icon: "flutter_dash" }
                 ]
             },
             {
                 letter: "Ss",
                 words: [
-                    { word: "Sun", phonetic: "sʌn", translation: "太陽", image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Star", phonetic: "stɑr", translation: "星星", image: "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Sun", phonetic: "sʌn", translation: "太陽", icon: "wb_sunny" },
+                    { word: "Star", phonetic: "stɑr", translation: "星星", icon: "star" }
                 ]
             },
             {
                 letter: "Tt",
                 words: [
-                    { word: "Tiger", phonetic: "ˈtaɪɡɚ", translation: "老虎", image: "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Tree", phonetic: "tri", translation: "大樹", image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Tiger", phonetic: "ˈtaɪɡɚ", translation: "老虎", icon: "forest" },
+                    { word: "Tree", phonetic: "tri", translation: "大樹", icon: "park" }
                 ]
             },
             {
                 letter: "Uu",
                 words: [
-                    { word: "Umbrella", phonetic: "ʌmˈbrɛlə", translation: "雨傘", image: "https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Up", phonetic: "ʌp", translation: "向上", image: "https://images.unsplash.com/photo-1603539950152-4fe377258380?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Umbrella", phonetic: "ʌmˈbrɛlə", translation: "雨傘", icon: "beach_access" },
+                    { word: "Up", phonetic: "ʌp", translation: "向上", icon: "arrow_upward" }
                 ]
             },
             {
                 letter: "Vv",
                 words: [
-                    { word: "Van", phonetic: "væn", translation: "箱型車", image: "https://images.unsplash.com/photo-1527786356703-4b100091cd2c?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Vest", phonetic: "vɛst", translation: "背心", image: "https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Van", phonetic: "væn", translation: "箱型車", image: "airport_shuttle" },
+                    { word: "Vest", phonetic: "vɛst", translation: "背心", icon: "checkroom" }
                 ]
             },
             {
                 letter: "Ww",
                 words: [
-                    { word: "Window", phonetic: "ˈwɪndo", translation: "窗戶", image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Wall", phonetic: "wɔl", translation: "牆壁", image: "https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Window", phonetic: "ˈwɪndo", translation: "窗戶", icon: "window" },
+                    { word: "Wall", phonetic: "wɔl", translation: "牆壁", icon: "grid_on" }
                 ]
             },
             {
                 letter: "Xx",
                 words: [
-                    { word: "Box", phonetic: "bɑks", translation: "箱子", image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Fox", phonetic: "fɑks", translation: "狐狸", image: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Box", phonetic: "bɑks", translation: "箱子", icon: "inventory_2" },
+                    { word: "Fox", phonetic: "fɑks", translation: "狐狸", icon: "animation" }
                 ]
             },
             {
                 letter: "Yy",
                 words: [
-                    { word: "Yellow", phonetic: "ˈjɛlo", translation: "黃色", image: "https://images.unsplash.com/photo-1569172119333-195527613398?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Yo-yo", phonetic: "ˈjoˌjo", translation: "溜溜球", image: "https://images.unsplash.com/photo-1627443577317-09d3b8417c87?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Yellow", phonetic: "ˈjɛlo", translation: "黃色", icon: "palette" },
+                    { word: "Yo-yo", phonetic: "ˈjoˌjo", translation: "溜溜球", icon: "incomplete_circle" }
                 ]
             },
             {
                 letter: "Zz",
                 words: [
-                    { word: "Zoo", phonetic: "zu", translation: "動物園", image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=600&q=80" },
-                    { word: "Zebra", phonetic: "ˈzibrə", translation: "斑馬", image: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=600&q=80" }
+                    { word: "Zoo", phonetic: "zu", translation: "動物園", icon: "map" },
+                    { word: "Zebra", phonetic: "ˈzibrə", translation: "斑馬", icon: "clear_all" }
                 ]
             }
         ];
 
-        // 延遲初始化 AudioContext 避免部分瀏覽器直接封鎖音效
         let audioCtx = null;
 
         function playSound(type) {
@@ -550,15 +583,8 @@
         let autoplay = false;
         let voiceRate = 0.8; 
 
-        // 全域觸控點，防止滑動報錯 ReferenceError
         let touchStartX = 0;
         let touchEndX = 0;
-
-        function handleImageError(imgElement) {
-            const altText = imgElement.alt || "Alphabet Object";
-            const word = altText.split(' ')[0] || "Learning";
-            imgElement.src = `https://placehold.co/600x600/FAF8F5/E07A5F?text=${encodeURIComponent(word)}`;
-        }
 
         window.addEventListener('DOMContentLoaded', () => {
             initAlphabetGrid();
@@ -569,8 +595,6 @@
         function initAlphabetGrid() {
             const grid = document.getElementById('alphabet-grid');
             grid.innerHTML = '';
-            
-            // 強制覆蓋自訂 13 欄格網排版，確保 RWD 不會壞掉
             grid.className = "grid grid-cols-6 sm:grid-cols-9 md:grid-cols-[repeat(13,minmax(0,1fr))] gap-2";
 
             cardData.forEach((item, index) => {
@@ -625,9 +649,8 @@
             document.getElementById('card-letter-title').innerText = data.letter;
             document.getElementById('card-index').innerText = `${String(currentIndex + 1).padStart(2, '0')} / 26`;
 
-            const imgLeft = document.getElementById('card-image-left');
-            imgLeft.src = word0.image;
-            imgLeft.alt = word0.word;
+            // 更新 Icon 內容與標籤
+            document.getElementById('card-icon-left').innerText = word0.icon || "star";
             document.getElementById('card-word-left-front').innerText = word0.word;
             document.getElementById('card-spelling-left-front').innerText = `${data.letter[0]} is for ${word0.word}`;
             document.getElementById('card-word-left-back').innerText = word0.word;
@@ -635,9 +658,7 @@
             document.getElementById('card-translation-left').innerText = word0.translation;
             document.getElementById('card-sentence-left').innerText = `${data.letter} is for ${word0.word} • /${word0.phonetic}/`;
 
-            const imgRight = document.getElementById('card-image-right');
-            imgRight.src = word1.image;
-            imgRight.alt = word1.word;
+            document.getElementById('card-icon-right').innerText = word1.icon || "star";
             document.getElementById('card-word-right-front').innerText = word1.word;
             document.getElementById('card-spelling-right-front').innerText = `${data.letter[0]} is for ${word1.word}`;
             document.getElementById('card-word-right-back').innerText = word1.word;
@@ -738,7 +759,7 @@
 
         function switchTab(mode) {
             currentMode = mode;
-            if (!audioCtx) playSound('init'); // 切換 Tab 時順便激活解鎖聲音限制
+            if (!audioCtx) playSound('init');
 
             document.getElementById('panel-flashcards').style.display = 'none';
             document.getElementById('panel-quiz').style.display = 'none';
@@ -770,7 +791,7 @@
                         word: w.word,
                         phonetic: w.phonetic,
                         translation: w.translation,
-                        image: w.image
+                        icon: w.icon
                     });
                 });
             });
@@ -796,7 +817,7 @@
             const currentQ = quizQuestions[quizCurrentIndex];
             document.getElementById('quiz-progress-text').innerText = `${quizCurrentIndex + 1} / 10`;
             document.getElementById('quiz-question-word').innerText = currentQ.word;
-            document.getElementById('quiz-question-letter').innerText = `哪一張圖片對應字母「 ${currentQ.letter} 」與單字呢？`;
+            document.getElementById('quiz-question-letter').innerText = `哪一個圖標對應字母「 ${currentQ.letter} 」與單字呢？`;
 
             let options = [currentQ];
             const allWords = getFlattenedWords();
@@ -810,11 +831,12 @@
 
             options.forEach((opt) => {
                 const optButton = document.createElement('button');
-                optButton.className = "group relative bg-[#FAF8F5] border-2 border-[#F4F1DE] hover:border-[#E07A5F]/40 p-3 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 hover:shadow-md active:scale-95";
-                optButton.dataset.word = opt.word; // 運用物件元素屬性安全綁定，預防文字字串錯誤的 Bug
+                optButton.className = "group relative bg-[#FAF8F5] border-2 border-[#F4F1DE] hover:border-[#E07A5F]/40 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 hover:shadow-md active:scale-95";
+                optButton.dataset.word = opt.word;
                 optButton.innerHTML = `
-                    <div class="w-full aspect-square bg-white rounded-xl overflow-hidden p-1 flex items-center justify-center border border-[#F4F1DE]/50">
-                        <img src="${opt.image}" alt="${opt.word}" class="max-h-full max-w-full object-contain rounded-lg" onerror="handleImageError(this)">
+                    <div class="w-full aspect-square bg-white rounded-xl overflow-hidden p-2 flex items-center justify-center border border-[#F4F1DE]/50">
+                        <!-- Quiz模式渲染Icon -->
+                        <span class="material-icons-round text-6xl text-[#E07A5F]/80 group-hover:scale-105 transition-transform select-none">${opt.icon || 'star'}</span>
                     </div>
                     <span class="text-base font-extrabold text-[#3D5A80] font-['Fredoka'] bg-white px-3 py-1 rounded-full border border-[#F4F1DE] shadow-sm">${opt.word}</span>
                 `;
@@ -834,19 +856,19 @@
             for (let btn of buttons) {
                 btn.classList.add('opacity-60');
                 if (btn.dataset.word === currentQ.word) {
-                    btn.className = "group relative bg-green-50 border-2 border-green-500 p-3 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-md";
+                    btn.className = "group relative bg-green-50 border-2 border-green-500 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-md";
                 }
             }
 
             buttonElement.classList.remove('opacity-60');
             if (isCorrect) {
                 playSound('success');
-                buttonElement.className = "group relative bg-green-50 border-2 border-green-500 p-3 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-md scale-102";
+                buttonElement.className = "group relative bg-green-50 border-2 border-green-500 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-md scale-102";
                 quizScore += 10;
                 document.getElementById('quiz-score').innerText = String(quizScore).padStart(2, '0');
             } else {
                 playSound('error');
-                buttonElement.className = "group relative bg-red-50 border-2 border-red-400 p-3 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-sm";
+                buttonElement.className = "group relative bg-red-50 border-2 border-red-400 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-sm";
             }
 
             playCustomWordSpeech(currentQ.word);
@@ -880,8 +902,9 @@
             spellInputChars = Array(currentTargetWord.length).fill('');
             
             document.getElementById('spell-progress-text').innerText = `${spellCurrentIndex + 1} / 10`;
-            document.getElementById('spell-image').src = currentQ.image;
-            document.getElementById('spell-image').alt = `${currentQ.word} 拼寫`;
+            
+            // 拼寫挑戰模式載入 Icon
+            document.getElementById('spell-icon').innerText = currentQ.icon || "star";
             document.getElementById('spell-letter-hint').innerText = `${currentQ.letter} for...`;
             document.getElementById('spell-translation-hint').innerText = currentQ.translation;
             document.getElementById('spell-phonetic-hint').innerText = `/${currentQ.phonetic}/`;
