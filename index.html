@@ -1,3 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Z 兒童英語互動學習圖卡 - Warm Cream Style</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Fredoka (圓潤可愛字型) & Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&family=Quicksand:wght=400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Quicksand', 'Fredoka', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #FAF8F5; /* 極淺溫柔燕麥米色 */
+        }
+
+        /* 3D 卡片翻轉設定 */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* 語音波紋動畫 */
+        @keyframes sound-bar {
+            0%, 100% { height: 4px; }
+            50% { height: 18px; }
+        }
+        .sound-bar-1 { animation: sound-bar 0.6s infinite ease-in-out; }
+        .sound-bar-2 { animation: sound-bar 0.4s infinite ease-in-out 0.1s; }
+        .sound-bar-3 { animation: sound-bar 0.8s infinite ease-in-out 0.2s; }
+    </style>
+</head>
+<body class="min-h-screen text-[#5C6B73] selection:bg-[#E07A5F]/20 overflow-x-hidden flex flex-col justify-between">
+
+    <!-- 頂部導覽列 -->
+    <header class="w-full max-w-6xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-[#E07A5F] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#E07A5F]/20">
+                A
+            </div>
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold text-[#3D5A80] tracking-wide flex items-center gap-2">
+                    A-Z 英語奇幻圖卡
+                </h1>
+                <p class="text-xs text-[#5C6B73]/70 font-medium">Warm Cream Educational Studio</p>
+            </div>
+        </div>
+
+        <!-- 模式切換按鈕組 -->
+        <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-2xl border border-[#F4F1DE] shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex gap-2">
+            <button onclick="switchTab('flashcards')" id="tab-flashcards" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/15">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7v12m0 0l-4-4m4 4l4-4m0 6V7m0 0l-4 4m4-4l4 4"/></svg>
+                圖卡模式
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 text-[#3D5A80] hover:bg-[#FAF8F5]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                趣味問答
+            </button>
+            <button onclick="switchTab('spell')" id="tab-spell" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 text-[#3D5A80] hover:bg-[#FAF8F5]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                拼寫挑戰
+            </button>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col justify-center items-center py-4">
+        
+        <!-- ======================= 1. 圖卡學習模式 ======================= -->
+        <section id="panel-flashcards" class="w-full flex flex-col items-center gap-6 animate-fade-in">
+            
+            <div class="w-full max-w-4xl flex flex-col items-center text-center gap-3">
+                <!-- 字母置中大標題 -->
+                <div class="space-y-1">
+                    <h2 class="text-6xl md:text-7xl font-black text-[#E07A5F] font-['Fredoka'] tracking-wider" id="card-letter-title">Aa</h2>
+                    <span class="text-sm font-bold bg-[#FAF8F5] border border-[#F4F1DE] text-[#3D5A80]/60 px-4 py-1 rounded-full" id="card-index">01 / 26</span>
+                </div>
+
+                <!-- 語速與自動播放控制 -->
+                <div class="flex items-center gap-4 mt-2">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="autoplay-toggle" class="sr-only peer" onchange="toggleAutoplay()">
+                        <div class="w-11 h-6 bg-[#E6E2D8] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#E07A5F]"></div>
+                        <span class="ml-2 text-xs font-bold text-[#5C6B73]">自動朗讀</span>
+                    </label>
+
+                    <div class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-[#F4F1DE]">
+                        <span class="text-xs font-bold text-[#5C6B73]/60">語速:</span>
+                        <select id="speech-rate" onchange="changeSpeechRate()" class="text-xs font-bold text-[#3D5A80] bg-transparent outline-none cursor-pointer">
+                            <option value="0.7">0.7x (慢速)</option>
+                            <option value="0.8" selected>0.8x (推薦)</option>
+                            <option value="1.0">1.0x (一般)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-center items-center gap-2 md:gap-6 max-w-5xl">
+                <!-- 上一張按鈕 -->
+                <button onclick="prevCard()" class="w-12 h-12 rounded-full bg-white border border-[#F4F1DE] text-[#3D5A80] hover:text-[#E07A5F] flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all duration-200 shrink-0 group" aria-label="Previous card">
+                    <svg class="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+
+                <!-- 雙圖卡並排區域 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl" id="cards-grid">
+                    
+                    <!-- 卡片 1 (單字一) -->
+                    <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer" id="swipe-container-1">
+                        <div id="flashcard-left" onclick="flipCard('left')" class="w-full h-full preserve-3d duration-700 ease-out-back relative rounded-3xl shadow-[0_12px_40px_rgba(112,102,90,0.06)] bg-white border border-[#F4F1DE]">
+                            
+                            <!-- 卡片 1 正面 -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rounded-3xl p-5 flex flex-col justify-between overflow-hidden bg-white">
+                                <div class="flex justify-end items-start">
+                                    <!-- 發音按鈕 (放在前面最顯眼處，不觸發翻牌) -->
+                                    <button onclick="event.stopPropagation(); playSpeech(0)" class="w-10 h-10 rounded-full bg-[#E07A5F]/10 hover:bg-[#E07A5F] text-[#E07A5F] hover:text-white flex items-center justify-center transition-all duration-300 active:scale-90 shadow-sm" title="聽聽發音">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                                    </button>
+                                </div>
+                                
+                                <!-- 高畫質精確去背圖片 -->
+                                <div class="flex-grow flex items-center justify-center my-2">
+                                    <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
+                                        <img id="card-image-left" src="" alt="" class="max-w-full max-h-full object-contain rounded-xl transition-all duration-300 opacity-0" onload="this.classList.remove('opacity-0')" onerror="handleImageError(this)">
+                                    </div>
+                                </div>
+
+                                <div class="text-center space-y-1">
+                                    <h3 class="text-3xl font-extrabold text-[#E07A5F] tracking-wide font-['Fredoka']" id="card-word-left-front">Apple</h3>
+                                    <div class="inline-flex items-center gap-1 px-3 py-0.5 bg-[#FAF8F5] rounded-full border border-[#F4F1DE]">
+                                        <span class="text-xs font-semibold text-[#3D5A80]" id="card-spelling-left-front">A is for Apple</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 卡片 1 背面 -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl p-5 flex flex-col justify-between bg-white overflow-hidden">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-[#3D5A80]">學習卡</span>
+                                    <span class="text-xs font-bold text-[#E07A5F] bg-[#E07A5F]/10 px-2 rounded-full">探索知識</span>
+                                </div>
+                                <div class="flex-grow flex flex-col items-center justify-center text-center space-y-4">
+                                    <div class="space-y-1">
+                                        <h3 class="text-3xl font-black text-[#E07A5F] font-['Fredoka']" id="card-word-left-back">Apple</h3>
+                                        <p class="text-sm font-bold text-[#3D5A80] bg-[#FAF8F5] px-3 py-0.5 rounded-full inline-block" id="card-phonetic-left">/æ/</p>
+                                    </div>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[9px] font-bold text-[#5C6B73]/40 tracking-wider">CHINESE</p>
+                                        <p class="text-xl font-black text-[#3D5A80]" id="card-translation-left">蘋果</p>
+                                    </div>
+                                    <div class="bg-[#FAF8F5] p-3 rounded-xl w-full border border-[#F4F1DE] max-w-xs">
+                                        <p class="text-xs font-bold text-[#5C6B73] text-left leading-relaxed" id="card-sentence-left">A is for Apple • /æ/</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 2 (單字二) -->
+                    <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer" id="swipe-container-2">
+                        <div id="flashcard-right" onclick="flipCard('right')" class="w-full h-full preserve-3d duration-700 ease-out-back relative rounded-3xl shadow-[0_12px_40px_rgba(112,102,90,0.06)] bg-white border border-[#F4F1DE]">
+                            
+                            <!-- 卡片 2 正面 -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rounded-3xl p-5 flex flex-col justify-between overflow-hidden bg-white">
+                                <div class="flex justify-end items-start">
+                                    <!-- 發音按鈕 (放在前面最顯眼處，不觸發翻牌) -->
+                                    <button onclick="event.stopPropagation(); playSpeech(1)" class="w-10 h-10 rounded-full bg-[#E07A5F]/10 hover:bg-[#E07A5F] text-[#E07A5F] hover:text-white flex items-center justify-center transition-all duration-300 active:scale-90 shadow-sm" title="聽聽發音">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                                    </button>
+                                </div>
+                                
+                                <!-- 高畫質精確去背圖片 -->
+                                <div class="flex-grow flex items-center justify-center my-2">
+                                    <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
+                                        <img id="card-image-right" src="" alt="" class="max-w-full max-h-full object-contain rounded-xl transition-all duration-300 opacity-0" onload="this.classList.remove('opacity-0')" onerror="handleImageError(this)">
+                                    </div>
+                                </div>
+
+                                <div class="text-center space-y-1">
+                                    <h3 class="text-3xl font-extrabold text-[#E07A5F] tracking-wide font-['Fredoka']" id="card-word-right-front">Ant</h3>
+                                    <div class="inline-flex items-center gap-1 px-3 py-0.5 bg-[#FAF8F5] rounded-full border border-[#F4F1DE]">
+                                        <span class="text-xs font-semibold text-[#3D5A80]" id="card-spelling-right-front">A is for Ant</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 卡片 2 背面 -->
+                            <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl p-5 flex flex-col justify-between bg-white overflow-hidden">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-[#3D5A80]">學習卡</span>
+                                    <span class="text-xs font-bold text-[#E07A5F] bg-[#E07A5F]/10 px-2 rounded-full">探索知識</span>
+                                </div>
+                                <div class="flex-grow flex flex-col items-center justify-center text-center space-y-4">
+                                    <div class="space-y-1">
+                                        <h3 class="text-3xl font-black text-[#E07A5F] font-['Fredoka']" id="card-word-right-back">Ant</h3>
+                                        <p class="text-sm font-bold text-[#3D5A80] bg-[#FAF8F5] px-3 py-0.5 rounded-full inline-block" id="card-phonetic-right">/ænt/</p>
+                                    </div>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[9px] font-bold text-[#5C6B73]/40 tracking-wider">CHINESE</p>
+                                        <p class="text-xl font-black text-[#3D5A80]" id="card-translation-right">螞蟻</p>
+                                    </div>
+                                    <div class="bg-[#FAF8F5] p-3 rounded-xl w-full border border-[#F4F1DE] max-w-xs">
+                                        <p class="text-xs font-bold text-[#5C6B73] text-left leading-relaxed" id="card-sentence-right">A is for Ant • /ænt/</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 下一張按鈕 -->
+                <button onclick="nextCard()" class="w-12 h-12 rounded-full bg-white border border-[#F4F1DE] text-[#3D5A80] hover:text-[#E07A5F] flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all duration-200 shrink-0 group" aria-label="Next card">
+                    <svg class="w-6 h-6 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+
+            <!-- 進度條 -->
+            <div class="w-full max-w-md bg-white rounded-full h-3 border border-[#F4F1DE] overflow-hidden p-0.5 shadow-sm">
+                <div id="progress-bar" class="bg-[#E07A5F] h-full rounded-full transition-all duration-500 ease-out" style="width: 3.84%"></div>
+            </div>
+
+            <!-- 字母快速跳轉 Grid -->
+            <div class="w-full max-w-4xl bg-white/60 rounded-3xl p-6 border border-[#F4F1DE] shadow-sm">
+                <h3 class="text-xs font-bold text-[#5C6B73]/60 mb-4 tracking-wider text-center">字母快捷跳轉 A - Z</h3>
+                <div class="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-2" id="alphabet-grid">
+                    <!-- JavaScript 動態產生 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= 2. 趣味問答模式 ======================= -->
+        <section id="panel-quiz" class="w-full max-w-xl mx-auto flex-col items-center gap-6 hidden animate-fade-in">
+            <!-- 問答進度與得分 -->
+            <div class="w-full flex justify-between items-center px-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-[#3D5A80]/70">Quiz 挑戰</span>
+                    <span class="text-xs font-bold bg-[#FAF8F5] text-[#3D5A80] border border-[#F4F1DE] px-3 py-1 rounded-full" id="quiz-progress-text">1 / 10</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-[#5C6B73]/60">得分:</span>
+                    <span class="text-lg font-black text-[#E07A5F]" id="quiz-score">00</span>
+                </div>
+            </div>
+
+            <!-- 問答卡片區 -->
+            <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
+                <!-- 題目敘述 -->
+                <div class="text-center space-y-1">
+                    <p class="text-xs font-bold text-[#5C6B73]/50">請選出正確的單字圖片</p>
+                    <h3 class="text-3xl font-extrabold text-[#3D5A80]" id="quiz-question-word">apple</h3>
+                    <p class="text-sm font-bold text-[#E07A5F]" id="quiz-question-letter">對應哪一個字母呢？</p>
+                </div>
+
+                <!-- 四個選項 (圖片 & 字母) -->
+                <div class="grid grid-cols-2 gap-4 w-full" id="quiz-options-container">
+                    <!-- 動態由 JS 產生 -->
+                </div>
+
+                <!-- 下一題按鈕 (回答後顯示) -->
+                <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="w-full py-4 rounded-2xl bg-[#3D5A80] text-white font-bold hover:bg-[#3D5A80]/90 active:scale-98 transition-all duration-200 flex items-center justify-center gap-2 shadow-md hidden">
+                    下一題
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- ======================= 3. 拼寫挑戰模式 ======================= -->
+        <section id="panel-spell" class="w-full max-w-xl mx-auto flex-col items-center gap-6 hidden animate-fade-in">
+            <!-- 拼寫進度與成績 -->
+            <div class="w-full flex justify-between items-center px-2">
+                <span class="text-sm font-bold text-[#3D5A80]/70">拼寫大作戰</span>
+                <span class="text-xs font-bold bg-[#FAF8F5] text-[#3D5A80] border border-[#F4F1DE] px-3 py-1 rounded-full" id="spell-progress-text">1 / 10</span>
+            </div>
+
+            <!-- 拼寫卡片 -->
+            <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
+                
+                <!-- 提示圖像 -->
+                <div class="relative w-40 h-40 bg-[#FAF8F5] rounded-2xl p-2 border border-[#F4F1DE] flex items-center justify-center">
+                    <img id="spell-image" src="" alt="Spell object" class="max-w-full max-h-full object-contain rounded-xl" onerror="handleImageError(this)">
+                </div>
+
+                <!-- 提示字母與音標 -->
+                <div class="text-center space-y-1">
+                    <h3 class="text-2xl font-black text-[#E07A5F]" id="spell-letter-hint">A a</h3>
+                    <p class="text-sm font-bold text-[#3D5A80]" id="spell-translation-hint">蘋果</p>
+                    <p class="text-xs font-semibold text-[#5C6B73]/60" id="spell-phonetic-hint">/æ/</p>
+                </div>
+
+                <!-- 拼寫空格區 -->
+                <div class="w-full space-y-4">
+                    <div class="flex justify-center gap-2" id="spell-slots-container">
+                        <!-- 動態字母空格 -->
+                    </div>
+
+                    <!-- 鍵盤輸入區 -->
+                    <input type="text" id="spell-hidden-input" class="absolute opacity-0 -z-10" autocomplete="off">
+                    
+                    <div class="text-center">
+                        <button onclick="focusSpellInput()" class="text-xs font-bold text-[#3D5A80] hover:text-[#E07A5F] underline underline-offset-4 decoration-2 transition-colors">
+                            點擊此處或按鍵盤開始輸入
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 控制與發音輔助 -->
+                <div class="flex gap-3 w-full">
+                    <button onclick="playSpellHintSpeech()" class="flex-1 py-3.5 rounded-xl border border-[#F4F1DE] bg-[#FAF8F5] hover:bg-white text-[#3D5A80] font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                        語音提示
+                    </button>
+                    <button onclick="checkSpelling()" class="flex-1 py-3.5 rounded-xl bg-[#E07A5F] text-white font-bold text-sm hover:bg-[#E07A5F]/95 active:scale-95 transition-all shadow-md shadow-[#E07A5F]/15">
+                        檢查答案
+                    </button>
+                </div>
+
+                <!-- 回應反饋框 -->
+                <div id="spell-feedback" class="w-full text-center font-bold text-sm py-2 px-4 rounded-xl hidden">
+                    <!-- 顯示正誤狀態 -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 底部資訊 & 提示 -->
+    <footer class="w-full py-6 text-center text-xs font-bold text-[#5C6B73]/50 border-t border-[#F4F1DE] mt-8 bg-white/40">
+        <p>© 2026 A-Z Educational Flashcards. All Rights Reserved. Designed with Love.</p>
+    </footer>
+
+    <!-- 彈出式慶祝 Modal -->
+    <div id="congrats-modal" class="fixed inset-0 bg-[#3D5A80]/40 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full mx-6 text-center border border-[#F4F1DE] shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="w-20 h-20 bg-[#F4F1DE] text-[#E07A5F] rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-bounce">
+                🎉
+            </div>
+            <h3 class="text-2xl font-black text-[#3D5A80] mb-2">哇！你太棒了！</h3>
+            <p class="text-sm text-[#5C6B73] mb-6" id="congrats-message">你已經完成了本次的所有大挑戰！獲得了 100 分完美皇冠！</p>
+            <button onclick="closeCongratsModal()" class="w-full py-3 rounded-2xl bg-[#E07A5F] text-white font-bold shadow-md hover:bg-[#E07A5F]/95 active:scale-95 transition-all">
+                繼續學習 A-Z
+            </button>
+        </div>
+    </div>
+    
 // 52個為小朋友精選的高解析度、主題精確、乾淨背景的 A-Z 雙單字資料集 (完整 26 字母對稱並排設計)
 const cardData = [
     {
