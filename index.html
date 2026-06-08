@@ -68,7 +68,7 @@
             </button>
             <button onclick="switchTab('quiz')" id="tab-quiz" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 text-[#3D5A80] hover:bg-[#FAF8F5]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                趣味問答
+                大小寫配對
             </button>
             <button onclick="switchTab('spell')" id="tab-spell" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 text-[#3D5A80] hover:bg-[#FAF8F5]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
@@ -132,7 +132,6 @@
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
                                     <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
-                                        <!-- 用大尺寸 Emoji 符號顯示 -->
                                         <span id="card-emoji-left" class="text-7xl md:text-8xl select-none filter drop-shadow-sm">🍎</span>
                                     </div>
                                 </div>
@@ -182,7 +181,6 @@
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
                                     <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
-                                        <!-- 用大尺寸 Emoji 符號顯示 -->
                                         <span id="card-emoji-right" class="text-7xl md:text-8xl select-none filter drop-shadow-sm">🐜</span>
                                     </div>
                                 </div>
@@ -240,11 +238,11 @@
             </div>
         </section>
 
-        <!-- ======================= 2. 趣味問答模式 ======================= -->
+        <!-- ======================= 2. 大小寫配對問答模式 ======================= -->
         <section id="panel-quiz" class="w-full max-w-xl mx-auto flex-col items-center gap-6 hidden animate-fade-in">
             <div class="w-full flex justify-between items-center px-2">
                 <div class="flex items-center gap-2">
-                    <span class="text-sm font-bold text-[#3D5A80]/70">Quiz 挑戰</span>
+                    <span class="text-sm font-bold text-[#3D5A80]/70">大小寫配對</span>
                     <span class="text-xs font-bold bg-[#FAF8F5] text-[#3D5A80] border border-[#F4F1DE] px-3 py-1 rounded-full" id="quiz-progress-text">1 / 10</span>
                 </div>
                 <div class="flex items-center gap-2">
@@ -254,12 +252,17 @@
             </div>
 
             <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
-                <div class="text-center space-y-1">
-                    <p class="text-xs font-bold text-[#5C6B73]/50">請選出正確的單字圖標</p>
-                    <h3 class="text-3xl font-extrabold text-[#3D5A80]" id="quiz-question-word">apple</h3>
-                    <p class="text-sm font-bold text-[#E07A5F]" id="quiz-question-letter">對應哪一個字母呢？</p>
+                <!-- 題目核心：大寫字母與輔助提示 -->
+                <div class="text-center space-y-2">
+                    <p class="text-xs font-bold text-[#5C6B73]/50 tracking-wide">請幫大寫字母找到正確的小寫隊友</p>
+                    <div class="flex items-center justify-center gap-4">
+                        <h3 class="text-7xl font-black text-[#E07A5F] font-['Fredoka'] tracking-wider" id="quiz-question-letter-main">A</h3>
+                        <span class="text-4xl" id="quiz-question-emoji-hint">🍎</span>
+                    </div>
+                    <p class="text-sm font-bold text-[#3D5A80]" id="quiz-question-word-hint">Apple 的開頭字母是哪一個呢？</p>
                 </div>
 
+                <!-- 四個選項按鈕 (改為純小寫英文字母) -->
                 <div class="grid grid-cols-2 gap-4 w-full" id="quiz-options-container">
                     <!-- 動態由 JS 產生 -->
                 </div>
@@ -280,7 +283,6 @@
 
             <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
                 <div class="relative w-40 h-40 bg-[#FAF8F5] rounded-2xl p-2 border border-[#F4F1DE] flex items-center justify-center">
-                    <!-- 拼寫模式載入大 Emoji -->
                     <span id="spell-emoji" class="text-6xl select-none filter drop-shadow-sm">🍎</span>
                 </div>
 
@@ -343,7 +345,6 @@
 
     <!-- ======================= JAVASCRIPT ======================= -->
     <script>
-        // 全數更換為各系統內建的繽紛原生 Emoji，完全防錯防呆且充滿童趣
         const cardData = [
             {
                 letter: "Aa",
@@ -363,7 +364,7 @@
                 letter: "Cc",
                 words: [
                     { word: "Cat", phonetic: "kæt", translation: "貓咪", emoji: "🐱" },
-                    { word: "Cup", phonetic: "kʌp", translation: "杯子", emoji: "☕" }
+                    { word: "Cup", phonetic: "kʌp", translation: "杯子", emoji: "🥛" }
                 ]
             },
             {
@@ -377,7 +378,7 @@
                 letter: "Ee",
                 words: [
                     { word: "Egg", phonetic: "ɛɡ", translation: "雞蛋", emoji: "🥚" },
-                    { word: "Eraser", phonetic: "ɪˈresɚ", translation: "橡皮擦", emoji: "🗞" }
+                    { word: "Eraser", phonetic: "ɪˈresɚ", translation: "橡皮擦", emoji: "🧼" }
                 ]
             },
             {
@@ -454,7 +455,7 @@
                 letter: "Pp",
                 words: [
                     { word: "Pig", phonetic: "pɪɡ", translation: "小豬", emoji: "🐷" },
-                    { word: "Pen", phonetic: "pɛn", translation: "筆", emoji: "🖊" }
+                    { word: "Pen", phonetic: "pɛn", translation: "鋼筆", emoji: "🖊️" }
                 ]
             },
             {
@@ -516,14 +517,14 @@
             {
                 letter: "Yy",
                 words: [
-                    { word: "Yellow", phonetic: "ˈjɛlo", translation: "黃色", emoji: "🟨" },
+                    { word: "Yellow", phonetic: "ˈjɛlo", translation: "黃色", emoji: "💛" },
                     { word: "Yo-yo", phonetic: "ˈjoˌjo", translation: "溜溜球", emoji: "🪀" }
                 ]
             },
             {
                 letter: "Zz",
                 words: [
-                    { word: "Zoo", phonetic: "zu", translation: "動物園", emoji: "⛺" },
+                    { word: "Zoo", phonetic: "zu", translation: "動物園", emoji: "🏞️" },
                     { word: "Zebra", phonetic: "ˈzibrə", translation: "斑馬", emoji: "🦓" }
                 ]
             }
@@ -646,7 +647,6 @@
             document.getElementById('card-letter-title').innerText = data.letter;
             document.getElementById('card-index').innerText = `${String(currentIndex + 1).padStart(2, '0')} / 26`;
 
-            // 渲染前端大 Emoji 畫面
             document.getElementById('card-emoji-left').innerText = word0.emoji || "⭐";
             document.getElementById('card-word-left-front').innerText = word0.word;
             document.getElementById('card-spelling-left-front').innerText = `${data.letter[0]} is for ${word0.word}`;
@@ -774,6 +774,7 @@
             if (mode === 'spell') initSpellGame();
         }
 
+        // ======================= 大小寫配對問答遊戲邏輯 =======================
         let quizQuestions = [];
         let quizCurrentIndex = 0;
         let quizScore = 0;
@@ -784,10 +785,9 @@
             cardData.forEach(card => {
                 card.words.forEach(w => {
                     pool.push({
-                        letter: card.letter,
+                        upperLetter: card.letter[0], // 大寫字母 (例如 'A')
+                        lowerLetter: card.letter[1], // 小寫字母 (例如 'a')
                         word: w.word,
-                        phonetic: w.phonetic,
-                        translation: w.translation,
                         emoji: w.emoji
                     });
                 });
@@ -803,6 +803,7 @@
             document.getElementById('quiz-next-btn').classList.add('hidden');
             
             const allWords = getFlattenedWords();
+            // 洗牌抽 10 題
             quizQuestions = allWords.sort(() => Math.random() - 0.5).slice(0, 10);
             renderQuizQuestion();
         }
@@ -813,31 +814,35 @@
             
             const currentQ = quizQuestions[quizCurrentIndex];
             document.getElementById('quiz-progress-text').innerText = `${quizCurrentIndex + 1} / 10`;
-            document.getElementById('quiz-question-word').innerText = currentQ.word;
-            document.getElementById('quiz-question-letter').innerText = `哪一個圖標對應字母「 ${currentQ.letter} 」與單字呢？`;
+            
+            // 更新題目顯示：大寫字母 + 關聯單字的 Emoji 提示
+            document.getElementById('quiz-question-letter-main').innerText = currentQ.upperLetter;
+            document.getElementById('quiz-question-emoji-hint').innerText = currentQ.emoji;
+            document.getElementById('quiz-question-word-hint').innerText = `「 ${currentQ.word} 」的開頭字母是哪一個呢？`;
 
-            let options = [currentQ];
-            const allWords = getFlattenedWords();
-            const filteredPool = allWords.filter(item => item.word !== currentQ.word);
-            const shuffledPool = filteredPool.sort(() => Math.random() - 0.5);
-            options.push(shuffledPool[0], shuffledPool[1], shuffledPool[2]);
-            options.sort(() => Math.random() - 0.5);
+            // 產生選項：1 個正解小寫字母，3 個錯誤隨機小寫字母
+            let options = [currentQ.lowerLetter];
+            
+            // 從 A-Z 收集其他相異的小寫字母作為干擾項
+            const allLetters = cardData.map(c => c.letter[1]);
+            const filteredLetters = allLetters.filter(l => l !== currentQ.lowerLetter);
+            const shuffledFakeLetters = filteredLetters.sort(() => Math.random() - 0.5);
+            
+            options.push(shuffledFakeLetters[0], shuffledFakeLetters[1], shuffledFakeLetters[2]);
+            options.sort(() => Math.random() - 0.5); // 洗牌選項
 
             const optionsContainer = document.getElementById('quiz-options-container');
             optionsContainer.innerHTML = '';
 
-            options.forEach((opt) => {
+            options.forEach((letterOption) => {
                 const optButton = document.createElement('button');
-                optButton.className = "group relative bg-[#FAF8F5] border-2 border-[#F4F1DE] hover:border-[#E07A5F]/40 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 hover:shadow-md active:scale-95";
-                optButton.dataset.word = opt.word;
+                // 換成超大、溫潤好點擊的純英文字母按鈕
+                optButton.className = "group relative bg-[#FAF8F5] border-2 border-[#F4F1DE] hover:border-[#E07A5F]/40 p-6 rounded-2xl flex items-center justify-center transition-all duration-300 hover:shadow-md active:scale-95";
+                optButton.dataset.letter = letterOption;
                 optButton.innerHTML = `
-                    <div class="w-full aspect-square bg-white rounded-xl overflow-hidden p-2 flex items-center justify-center border border-[#F4F1DE]/50">
-                        <!-- 選擇題模式渲染大 Emoji -->
-                        <span class="text-5xl group-hover:scale-110 transition-transform select-none filter drop-shadow-sm">${opt.emoji || '⭐'}</span>
-                    </div>
-                    <span class="text-base font-extrabold text-[#3D5A80] font-['Fredoka'] bg-white px-3 py-1 rounded-full border border-[#F4F1DE] shadow-sm">${opt.word}</span>
+                    <span class="text-5xl md:text-6xl font-black text-[#3D5A80] font-['Fredoka'] group-hover:scale-105 transition-transform select-none">${letterOption}</span>
                 `;
-                optButton.onclick = () => selectQuizAnswer(optButton, opt.word === currentQ.word);
+                optButton.onclick = () => selectQuizAnswer(optButton, letterOption === currentQ.lowerLetter);
                 optionsContainer.appendChild(optButton);
             });
         }
@@ -850,24 +855,28 @@
             const optionsContainer = document.getElementById('quiz-options-container');
             const buttons = optionsContainer.getElementsByTagName('button');
 
+            // 亮出正確與錯誤答案回饋
             for (let btn of buttons) {
-                btn.classList.add('opacity-60');
-                if (btn.dataset.word === currentQ.word) {
-                    btn.className = "group relative bg-green-50 border-2 border-green-500 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-md";
+                btn.classList.add('opacity-40');
+                if (btn.dataset.letter === currentQ.lowerLetter) {
+                    btn.className = "group relative bg-green-50 border-2 border-green-500 p-6 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md";
+                    btn.querySelector('span').className = "text-5xl md:text-6xl font-black text-green-600 font-['Fredoka'] select-none";
                 }
             }
 
-            buttonElement.classList.remove('opacity-60');
+            buttonElement.classList.remove('opacity-40');
             if (isCorrect) {
                 playSound('success');
-                buttonElement.className = "group relative bg-green-50 border-2 border-green-500 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-md scale-102";
+                buttonElement.className = "group relative bg-green-50 border-2 border-green-500 p-6 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md scale-102";
                 quizScore += 10;
                 document.getElementById('quiz-score').innerText = String(quizScore).padStart(2, '0');
             } else {
                 playSound('error');
-                buttonElement.className = "group relative bg-red-50 border-2 border-red-400 p-4 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 shadow-sm";
+                buttonElement.className = "group relative bg-red-50 border-2 border-red-400 p-6 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-sm";
+                buttonElement.querySelector('span').className = "text-5xl md:text-6xl font-black text-red-500 font-['Fredoka'] select-none";
             }
 
+            // 答對或答錯都朗讀該單字，強化聲音與字母的連結
             playCustomWordSpeech(currentQ.word);
             document.getElementById('quiz-next-btn').classList.remove('hidden');
         }
@@ -877,10 +886,11 @@
             if (quizCurrentIndex < 10) {
                 renderQuizQuestion();
             } else {
-                openCongratsModal(`你成功完成了 10 題 A-Z 趣味問答！獲得了完美的 ${quizScore} 分！加油，英文大師！`);
+                openCongratsModal(`你完成了 10 題大小寫配對大挑戰！獲得了完美的 ${quizScore} 分！太厲害了！`);
             }
         }
 
+        // ======================= 3. 拼寫挑戰挑戰邏輯 =======================
         let spellQuestions = [];
         let spellCurrentIndex = 0;
         let spellInputChars = [];
@@ -900,11 +910,10 @@
             
             document.getElementById('spell-progress-text').innerText = `${spellCurrentIndex + 1} / 10`;
             
-            // 拼寫遊戲模式更新 Emoji
             document.getElementById('spell-emoji').innerText = currentQ.emoji || "⭐";
-            document.getElementById('spell-letter-hint').innerText = `${currentQ.letter} for...`;
-            document.getElementById('spell-translation-hint').innerText = currentQ.translation;
-            document.getElementById('spell-phonetic-hint').innerText = `/${currentQ.phonetic}/`;
+            document.getElementById('spell-letter-hint').innerText = `${currentQ.upperLetter}${currentQ.lowerLetter} for...`;
+            document.getElementById('spell-translation-hint').innerText = cardData.find(c => c.letter[0] === currentQ.upperLetter).words.find(w => w.word === currentQ.word).translation;
+            document.getElementById('spell-phonetic-hint').innerText = `/${cardData.find(c => c.letter[0] === currentQ.upperLetter).words.find(w => w.word === currentQ.word).phonetic}/`;
 
             const feedback = document.getElementById('spell-feedback');
             feedback.classList.add('hidden');
