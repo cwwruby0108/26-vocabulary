@@ -13,9 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&family=Quicksand:wght=400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Google Material Icons (用於替換圖片) -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-
     <style>
         body {
             font-family: 'Quicksand', 'Fredoka', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -135,8 +132,8 @@
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
                                     <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
-                                        <!-- 用 Material Icon 替換 Img -->
-                                        <span id="card-icon-left" class="material-icons-round text-8xl md:text-9xl text-[#E07A5F] select-none">apple</span>
+                                        <!-- 用大尺寸 Emoji 符號顯示 -->
+                                        <span id="card-emoji-left" class="text-7xl md:text-8xl select-none filter drop-shadow-sm">🍎</span>
                                     </div>
                                 </div>
 
@@ -185,8 +182,8 @@
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
                                     <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
-                                        <!-- 用 Material Icon 替換 Img -->
-                                        <span id="card-icon-right" class="material-icons-round text-8xl md:text-9xl text-[#E07A5F] select-none">bug_report</span>
+                                        <!-- 用大尺寸 Emoji 符號顯示 -->
+                                        <span id="card-emoji-right" class="text-7xl md:text-8xl select-none filter drop-shadow-sm">🐜</span>
                                     </div>
                                 </div>
 
@@ -283,8 +280,8 @@
 
             <div class="w-full bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-[0_12px_40px_rgba(112,102,90,0.04)] flex flex-col items-center gap-6">
                 <div class="relative w-40 h-40 bg-[#FAF8F5] rounded-2xl p-2 border border-[#F4F1DE] flex items-center justify-center">
-                    <!-- 拼寫模式也換成大 Icon -->
-                    <span id="spell-icon" class="material-icons-round text-7xl text-[#E07A5F] select-none">apple</span>
+                    <!-- 拼寫模式載入大 Emoji -->
+                    <span id="spell-emoji" class="text-6xl select-none filter drop-shadow-sm">🍎</span>
                 </div>
 
                 <div class="text-center space-y-1">
@@ -346,188 +343,188 @@
 
     <!-- ======================= JAVASCRIPT ======================= -->
     <script>
-        // 全數替換成 Google Material Icons 設計編碼，完全避免圖片連結錯亂或失聯問題
+        // 全數更換為各系統內建的繽紛原生 Emoji，完全防錯防呆且充滿童趣
         const cardData = [
             {
                 letter: "Aa",
                 words: [
-                    { word: "Apple", phonetic: "æpl", translation: "蘋果", icon: "apple" },
-                    { word: "Ant", phonetic: "ænt", translation: "螞蟻", icon: "bug_report" }
+                    { word: "Apple", phonetic: "æpl", translation: "蘋果", emoji: "🍎" },
+                    { word: "Ant", phonetic: "ænt", translation: "螞蟻", emoji: "🐜" }
                 ]
             },
             {
                 letter: "Bb",
                 words: [
-                    { word: "Banana", phonetic: "bəˈnænə", translation: "香蕉", icon: "breakfast_dining" },
-                    { word: "Ball", phonetic: "bɔl", translation: "球", icon: "sports_volleyball" }
+                    { word: "Banana", phonetic: "bəˈnænə", translation: "香蕉", emoji: "🍌" },
+                    { word: "Ball", phonetic: "bɔl", translation: "球", emoji: "⚽" }
                 ]
             },
             {
                 letter: "Cc",
                 words: [
-                    { word: "Cat", phonetic: "kæt", translation: "貓咪", icon: "pets" },
-                    { word: "Cup", phonetic: "kʌp", translation: "杯子", icon: "local_cafe" }
+                    { word: "Cat", phonetic: "kæt", translation: "貓咪", emoji: "🐱" },
+                    { word: "Cup", phonetic: "kʌp", translation: "杯子", emoji: "🥛" }
                 ]
             },
             {
                 letter: "Dd",
                 words: [
-                    { word: "Dog", phonetic: "dɔɡ", translation: "小狗", icon: "bedroom_child" },
-                    { word: "Doll", phonetic: "dɑl", translation: "洋娃娃", icon: "face" }
+                    { word: "Dog", phonetic: "dɔɡ", translation: "小狗", emoji: "🐶" },
+                    { word: "Doll", phonetic: "dɑl", translation: "洋娃娃", emoji: "🧸" }
                 ]
             },
             {
                 letter: "Ee",
                 words: [
-                    { word: "Egg", phonetic: "ɛɡ", translation: "雞蛋", icon: "egg" },
-                    { word: "Eraser", phonetic: "ɪˈresɚ", translation: "橡皮擦", icon: "auto_fix_normal" }
+                    { word: "Egg", phonetic: "ɛɡ", translation: "雞蛋", emoji: "🥚" },
+                    { word: "Eraser", phonetic: "ɪˈresɚ", translation: "橡皮擦", emoji: "🧼" }
                 ]
             },
             {
                 letter: "Ff",
                 words: [
-                    { word: "Fish", phonetic: "fɪʃ", translation: "魚兒", icon: "set_meal" },
-                    { word: "Frog", phonetic: "frɑɡ", translation: "青蛙", icon: "cruelty_free" }
+                    { word: "Fish", phonetic: "fɪʃ", translation: "魚兒", emoji: "🐟" },
+                    { word: "Frog", phonetic: "frɑɡ", translation: "青蛙", emoji: "🐸" }
                 ]
             },
             {
                 letter: "Gg",
                 words: [
-                    { word: "Girl", phonetic: "ɡɝl", translation: "女孩", icon: "face_3" },
-                    { word: "Goat", phonetic: "ɡot", translation: "山羊", icon: "scuba_diving" } // 無山羊圖標時的趣味替代
+                    { word: "Girl", phonetic: "ɡɝl", translation: "女孩", emoji: "👧" },
+                    { word: "Goat", phonetic: "ɡot", translation: "山羊", emoji: "🐐" }
                 ]
             },
             {
                 letter: "Hh",
                 words: [
-                    { word: "Hand", phonetic: "hænd", translation: "手掌", icon: "front_hand" },
-                    { word: "Hat", phonetic: "hæt", translation: "帽子", icon: "workspace_premium" }
+                    { word: "Hand", phonetic: "hænd", translation: "手掌", emoji: "✋" },
+                    { word: "Hat", phonetic: "hæt", translation: "帽子", emoji: "🎩" }
                 ]
             },
             {
                 letter: "Ii",
                 words: [
-                    { word: "Ink", phonetic: "ɪŋk", translation: "墨水", icon: "colorize" },
-                    { word: "Ice", phonetic: "aɪs", translation: "冰塊", icon: "icecream" }
+                    { word: "Ink", phonetic: "ɪŋk", translation: "墨水", emoji: "✒️" },
+                    { word: "Ice", phonetic: "aɪs", translation: "冰塊", emoji: "🧊" }
                 ]
             },
             {
                 letter: "Jj",
                 words: [
-                    { word: "Juice", phonetic: "dʒus", translation: "果汁", icon: "blender" },
-                    { word: "Jet", phonetic: "dʒɛt", translation: "噴射機", icon: "flight" }
+                    { word: "Juice", phonetic: "dʒus", translation: "果汁", emoji: "🍹" },
+                    { word: "Jet", phonetic: "dʒɛt", translation: "噴射機", emoji: "🛩️" }
                 ]
             },
             {
                 letter: "Kk",
                 words: [
-                    { word: "Kite", phonetic: "kaɪt", translation: "風箏", icon: "sailing" },
-                    { word: "King", phonetic: "kɪŋ", translation: "國王", icon: "military_tech" }
+                    { word: "Kite", phonetic: "kaɪt", translation: "風箏", emoji: "🪁" },
+                    { word: "King", phonetic: "kɪŋ", translation: "國王", emoji: "👑" }
                 ]
             },
             {
                 letter: "Ll",
                 words: [
-                    { word: "Lion", phonetic: "ˈlaɪən", translation: "獅子", icon: "gavel" }, 
-                    { word: "Leg", phonetic: "lɛɡ", translation: "腿", icon: "accessibility" }
+                    { word: "Lion", phonetic: "ˈlaɪən", translation: "獅子", emoji: "🦁" }, 
+                    { word: "Leg", phonetic: "lɛɡ", translation: "腿", emoji: "🦵" }
                 ]
             },
             {
                 letter: "Mm",
                 words: [
-                    { word: "Monkey", phonetic: "ˈmʌŋki", translation: "猴子", icon: "smart_toy" },
-                    { word: "Milk", phonetic: "mɪlk", translation: "牛奶", icon: "water_drop" }
+                    { word: "Monkey", phonetic: "ˈmʌŋki", translation: "猴子", emoji: "🐵" },
+                    { word: "Milk", phonetic: "mɪlk", translation: "牛奶", emoji: "🥛" }
                 ]
             },
             {
                 letter: "Nn",
                 words: [
-                    { word: "Nut", phonetic: "nʌt", translation: "堅果", icon: "eco" },
-                    { word: "Nose", phonetic: "noz", translation: "鼻子", icon: "theater_comedy" }
+                    { word: "Nut", phonetic: "nʌt", translation: "堅果", emoji: "🥜" },
+                    { word: "Nose", phonetic: "noz", translation: "鼻子", emoji: "👃" }
                 ]
             },
             {
                 letter: "Oo",
                 words: [
-                    { word: "Ox", phonetic: "ɑks", translation: "公牛", icon: "agriculture" },
-                    { word: "Owl", phonetic: "aʊl", translation: "貓頭鷹", icon: "visibility" }
+                    { word: "Ox", phonetic: "ɑks", translation: "公牛", emoji: "🐂" },
+                    { word: "Owl", phonetic: "aʊl", translation: "貓頭鷹", emoji: "🦉" }
                 ]
             },
             {
                 letter: "Pp",
                 words: [
-                    { word: "Pig", phonetic: "pɪɡ", translation: "小豬", icon: "savings" },
-                    { word: "Pen", phonetic: "pɛn", translation: "鋼筆", icon: "edit" }
+                    { word: "Pig", phonetic: "pɪɡ", translation: "小豬", emoji: "🐷" },
+                    { word: "Pen", phonetic: "pɛn", translation: "鋼筆", emoji: "🖊️" }
                 ]
             },
             {
                 letter: "Qq",
                 words: [
-                    { word: "Queen", phonetic: "kwin", translation: "皇后", icon: "castle" },
-                    { word: "Quiet", phonetic: "ˈkwaɪət", translation: "安靜", icon: "volume_off" }
+                    { word: "Queen", phonetic: "kwin", translation: "皇后", emoji: "👸" },
+                    { word: "Quiet", phonetic: "ˈkwaɪət", translation: "安靜", emoji: "🤫" }
                 ]
             },
             {
                 letter: "Rr",
                 words: [
-                    { word: "Ring", phonetic: "rɪŋ", translation: "戒指", icon: "blur_circular" },
-                    { word: "Rabbit", phonetic: "ˈræbɪt", translation: "兔子", icon: "flutter_dash" }
+                    { word: "Ring", phonetic: "rɪŋ", translation: "戒指", emoji: "💍" },
+                    { word: "Rabbit", phonetic: "ˈræbɪt", translation: "兔子", emoji: "🐰" }
                 ]
             },
             {
                 letter: "Ss",
                 words: [
-                    { word: "Sun", phonetic: "sʌn", translation: "太陽", icon: "wb_sunny" },
-                    { word: "Star", phonetic: "stɑr", translation: "星星", icon: "star" }
+                    { word: "Sun", phonetic: "sʌn", translation: "太陽", emoji: "☀️" },
+                    { word: "Star", phonetic: "stɑr", translation: "星星", emoji: "⭐" }
                 ]
             },
             {
                 letter: "Tt",
                 words: [
-                    { word: "Tiger", phonetic: "ˈtaɪɡɚ", translation: "老虎", icon: "forest" },
-                    { word: "Tree", phonetic: "tri", translation: "大樹", icon: "park" }
+                    { word: "Tiger", phonetic: "ˈtaɪɡɚ", translation: "老虎", emoji: "🐅" },
+                    { word: "Tree", phonetic: "tri", translation: "大樹", emoji: "🌳" }
                 ]
             },
             {
                 letter: "Uu",
                 words: [
-                    { word: "Umbrella", phonetic: "ʌmˈbrɛlə", translation: "雨傘", icon: "beach_access" },
-                    { word: "Up", phonetic: "ʌp", translation: "向上", icon: "arrow_upward" }
+                    { word: "Umbrella", phonetic: "ʌmˈbrɛlə", translation: "雨傘", emoji: "☂️" },
+                    { word: "Up", phonetic: "ʌp", translation: "向上", emoji: "⬆️" }
                 ]
             },
             {
                 letter: "Vv",
                 words: [
-                    { word: "Van", phonetic: "væn", translation: "箱型車", image: "airport_shuttle" },
-                    { word: "Vest", phonetic: "vɛst", translation: "背心", icon: "checkroom" }
+                    { word: "Van", phonetic: "væn", translation: "箱型車", emoji: "🚐" },
+                    { word: "Vest", phonetic: "vɛst", translation: "背心", emoji: "🎽" }
                 ]
             },
             {
                 letter: "Ww",
                 words: [
-                    { word: "Window", phonetic: "ˈwɪndo", translation: "窗戶", icon: "window" },
-                    { word: "Wall", phonetic: "wɔl", translation: "牆壁", icon: "grid_on" }
+                    { word: "Window", phonetic: "ˈwɪndo", translation: "窗戶", emoji: "🪟" },
+                    { word: "Wall", phonetic: "wɔl", translation: "牆壁", emoji: "🧱" }
                 ]
             },
             {
                 letter: "Xx",
                 words: [
-                    { word: "Box", phonetic: "bɑks", translation: "箱子", icon: "inventory_2" },
-                    { word: "Fox", phonetic: "fɑks", translation: "狐狸", icon: "animation" }
+                    { word: "Box", phonetic: "bɑks", translation: "箱子", emoji: "📦" },
+                    { word: "Fox", phonetic: "fɑks", translation: "狐狸", emoji: "🦊" }
                 ]
             },
             {
                 letter: "Yy",
                 words: [
-                    { word: "Yellow", phonetic: "ˈjɛlo", translation: "黃色", icon: "palette" },
-                    { word: "Yo-yo", phonetic: "ˈjoˌjo", translation: "溜溜球", icon: "incomplete_circle" }
+                    { word: "Yellow", phonetic: "ˈjɛlo", translation: "黃色", emoji: "💛" },
+                    { word: "Yo-yo", phonetic: "ˈjoˌjo", translation: "溜溜球", emoji: "🪀" }
                 ]
             },
             {
                 letter: "Zz",
                 words: [
-                    { word: "Zoo", phonetic: "zu", translation: "動物園", icon: "map" },
-                    { word: "Zebra", phonetic: "ˈzibrə", translation: "斑馬", icon: "clear_all" }
+                    { word: "Zoo", phonetic: "zu", translation: "動物園", emoji: "🏞️" },
+                    { word: "Zebra", phonetic: "ˈzibrə", translation: "斑馬", emoji: "🦓" }
                 ]
             }
         ];
@@ -649,8 +646,8 @@
             document.getElementById('card-letter-title').innerText = data.letter;
             document.getElementById('card-index').innerText = `${String(currentIndex + 1).padStart(2, '0')} / 26`;
 
-            // 更新 Icon 內容與標籤
-            document.getElementById('card-icon-left').innerText = word0.icon || "star";
+            // 渲染前端大 Emoji 畫面
+            document.getElementById('card-emoji-left').innerText = word0.emoji || "⭐";
             document.getElementById('card-word-left-front').innerText = word0.word;
             document.getElementById('card-spelling-left-front').innerText = `${data.letter[0]} is for ${word0.word}`;
             document.getElementById('card-word-left-back').innerText = word0.word;
@@ -658,7 +655,7 @@
             document.getElementById('card-translation-left').innerText = word0.translation;
             document.getElementById('card-sentence-left').innerText = `${data.letter} is for ${word0.word} • /${word0.phonetic}/`;
 
-            document.getElementById('card-icon-right').innerText = word1.icon || "star";
+            document.getElementById('card-emoji-right').innerText = word1.emoji || "⭐";
             document.getElementById('card-word-right-front').innerText = word1.word;
             document.getElementById('card-spelling-right-front').innerText = `${data.letter[0]} is for ${word1.word}`;
             document.getElementById('card-word-right-back').innerText = word1.word;
@@ -791,7 +788,7 @@
                         word: w.word,
                         phonetic: w.phonetic,
                         translation: w.translation,
-                        icon: w.icon
+                        emoji: w.emoji
                     });
                 });
             });
@@ -835,8 +832,8 @@
                 optButton.dataset.word = opt.word;
                 optButton.innerHTML = `
                     <div class="w-full aspect-square bg-white rounded-xl overflow-hidden p-2 flex items-center justify-center border border-[#F4F1DE]/50">
-                        <!-- Quiz模式渲染Icon -->
-                        <span class="material-icons-round text-6xl text-[#E07A5F]/80 group-hover:scale-105 transition-transform select-none">${opt.icon || 'star'}</span>
+                        <!-- 選擇題模式渲染大 Emoji -->
+                        <span class="text-5xl group-hover:scale-110 transition-transform select-none filter drop-shadow-sm">${opt.emoji || '⭐'}</span>
                     </div>
                     <span class="text-base font-extrabold text-[#3D5A80] font-['Fredoka'] bg-white px-3 py-1 rounded-full border border-[#F4F1DE] shadow-sm">${opt.word}</span>
                 `;
@@ -903,8 +900,8 @@
             
             document.getElementById('spell-progress-text').innerText = `${spellCurrentIndex + 1} / 10`;
             
-            // 拼寫挑戰模式載入 Icon
-            document.getElementById('spell-icon').innerText = currentQ.icon || "star";
+            // 拼寫遊戲模式更新 Emoji
+            document.getElementById('spell-emoji').innerText = currentQ.emoji || "⭐";
             document.getElementById('spell-letter-hint').innerText = `${currentQ.letter} for...`;
             document.getElementById('spell-translation-hint').innerText = currentQ.translation;
             document.getElementById('spell-phonetic-hint').innerText = `/${currentQ.phonetic}/`;
