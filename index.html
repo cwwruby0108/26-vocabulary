@@ -149,11 +149,11 @@
                     <svg class="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
 
-                <!-- 雙圖卡並排區域 (白色卡片部分再縮小優化，極致收攏 max-w-2xl 防止平板上太空曠) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mx-auto" id="cards-grid">
+                <!-- 雙圖卡並排區域 (白色卡片部分極致收攏，在平板與手機上都絕不穿幫，sm 以上自動雙欄) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-xl mx-auto" id="cards-grid">
                     
-                    <!-- 卡片 1 (單字一) -->
-                    <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer relative" id="swipe-container-1" onclick="flipCard('left')">
+                    <!-- 卡片 1 (單字一) - 加入 max-w-[260px] sm:max-w-[290px] 的物理卡片寬度限制 -->
+                    <div class="w-full max-w-[260px] sm:max-w-[290px] aspect-[4/5] perspective-1000 cursor-pointer relative mx-auto" id="swipe-container-1" onclick="flipCard('left')">
                         <div id="flashcard-left-inner" class="card-inner">
                             
                             <!-- 卡片 1 正面 -->
@@ -201,9 +201,8 @@
                         </div>
                     </div>
 
-                    <!-- STREAMING_CHUNK:Constructing secondary flashcard components with light oat borders -->
-                    <!-- 卡片 2 (單字二) -->
-                    <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer relative" id="swipe-container-2" onclick="flipCard('right')">
+                    <!-- 卡片 2 (單字二) - 加入 max-w-[260px] sm:max-w-[290px] 的物理卡片寬度限制 -->
+                    <div class="w-full max-w-[260px] sm:max-w-[290px] aspect-[4/5] perspective-1000 cursor-pointer relative mx-auto" id="swipe-container-2" onclick="flipCard('right')">
                         <div id="flashcard-right-inner" class="card-inner">
                             
                             <!-- 卡片 2 正面 -->
@@ -1322,7 +1321,7 @@
             }
         }
 
-        // ======================= 4. 配對翻翻樂模式 =======================
+        // ======================= 4. 配對翻翻樂遊戲邏輯 =======================
         let memoryCards = [];
         let memoryFlippedCards = [];
         let memoryFlips = 0;
