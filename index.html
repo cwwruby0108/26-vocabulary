@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&family=Quicksand:wght=400;600;700&display=swap" rel="stylesheet">
 
+    <!-- STREAMING_CHUNK:Declaring custom css backface and transitions for 3D flip card stability -->
     <style>
         body {
             font-family: 'Quicksand', 'Fredoka', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -67,6 +68,7 @@
 </head>
 <body class="min-h-screen text-[#5C6B73] selection:bg-[#E07A5F]/20 overflow-x-hidden flex flex-col justify-between">
 
+    <!-- STREAMING_CHUNK:Structuring header and navigation elements with custom colors -->
     <!-- 頂部導覽列 -->
     <header class="w-full max-w-6xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center gap-3">
@@ -76,9 +78,11 @@
             <div>
                 <h1 class="text-xl md:text-2xl font-bold text-[#3D5A80] tracking-wide flex items-center gap-2">
                     A-Z 英語學習圖卡
+                </h1>
             </div>
         </div>
 
+        <!-- STREAMING_CHUNK:Assembling warm pastel mode-switching tab buttons -->
         <!-- 模式切換按鈕組 -->
         <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-2xl border border-[#F4F1DE] shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-wrap gap-1">
             <button onclick="switchTab('flashcards')" id="tab-flashcards" class="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/15">
@@ -103,6 +107,7 @@
     <!-- 主要內容區 -->
     <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col justify-center items-center py-4">
         
+        <!-- STREAMING_CHUNK:Constructing immersive 26 letter learning flashcard grids -->
         <!-- ======================= 1. 圖卡學習模式 ======================= -->
         <section id="panel-flashcards" class="w-full flex flex-col items-center gap-6 animate-fade-in">
             
@@ -111,7 +116,7 @@
                 <div class="space-y-1 cursor-pointer group" onclick="playLetterNameSpeech()" title="聽聽字母讀音">
                     <h2 class="text-6xl md:text-7xl font-black text-[#E07A5F] font-['Fredoka'] tracking-wider group-hover:scale-105 transition-transform" id="card-letter-title">Aa</h2>
                     
-                    <!-- 字母與進度標籤顯示區 (已移除 KK 音標標籤) -->
+                    <!-- 字母與進度標籤顯示區 (已依需求移除 KK 音標標籤) -->
                     <div class="flex items-center justify-center gap-2">
                         <span class="text-sm font-bold bg-white border border-[#F4F1DE] text-[#3D5A80]/60 px-4 py-1 rounded-full shadow-sm" id="card-index">01 / 26</span>
                     </div>
@@ -136,15 +141,16 @@
                 </div>
             </div>
 
-            <!-- 雙圖卡並排區域 - 恢復為最美觀的 RWD 自動寬度與 4/5 比例 -->
+            <!-- STREAMING_CHUNK:Structuring card containers with portrait golden ratio layout dimensions -->
+            <!-- 雙圖卡並排區域 -->
             <div class="w-full flex justify-center items-center gap-4 md:gap-8 max-w-5xl">
                 <!-- 上一張按鈕 -->
                 <button onclick="prevCard()" class="w-12 h-12 rounded-full bg-white border border-[#F4F1DE] text-[#3D5A80] hover:text-[#E07A5F] flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 transition-all duration-200 shrink-0 group" aria-label="Previous card">
                     <svg class="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
 
-                <!-- 雙圖卡並排區域 (回歸原本 4:5 黃金比例寬度) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl" id="cards-grid">
+                <!-- 雙圖卡並排區域 (白色卡片部分再縮小優化，極致收攏 max-w-2xl 防止平板上太空曠) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mx-auto" id="cards-grid">
                     
                     <!-- 卡片 1 (單字一) -->
                     <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer relative" id="swipe-container-1" onclick="flipCard('left')">
@@ -159,7 +165,7 @@
                                 </div>
                                 
                                 <div class="flex-grow flex items-center justify-center my-2">
-                                    <div class="relative w-full max-w-[180px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
+                                    <div class="relative w-full max-w-[150px] aspect-square rounded-2xl overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center">
                                         <span id="card-emoji-left" class="text-7xl md:text-8xl select-none filter drop-shadow-sm">🍎</span>
                                     </div>
                                 </div>
@@ -172,7 +178,7 @@
                                 </div>
                             </div>
 
-                            <!-- 卡片 1 背面 (全新獨立面相容架構，物理級阻斷文字鏡像顛倒，已完全移除 KK 音標) -->
+                            <!-- 卡片 1 背面 (全新獨立面相容架構，已完全移除 KK 音標) -->
                             <div class="card-face card-face-back rounded-3xl shadow-[0_12px_40px_rgba(112,102,90,0.06)] bg-white border border-[#F4F1DE] p-6 flex flex-col justify-between overflow-hidden">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm font-bold text-[#3D5A80]">學習卡</span>
@@ -195,6 +201,7 @@
                         </div>
                     </div>
 
+                    <!-- STREAMING_CHUNK:Constructing secondary flashcard components with light oat borders -->
                     <!-- 卡片 2 (單字二) -->
                     <div class="w-full aspect-[4/5] perspective-1000 cursor-pointer relative" id="swipe-container-2" onclick="flipCard('right')">
                         <div id="flashcard-right-inner" class="card-inner">
@@ -221,7 +228,7 @@
                                 </div>
                             </div>
 
-                            <!-- 卡片 2 背面 (全新獨立面相容架構，物理級阻斷文字鏡像顛倒，已完全移除 KK 音標) -->
+                            <!-- 卡片 2 背面 (全新獨立面相容架構，已完全移除 KK 音標) -->
                             <div class="card-face card-face-back rounded-3xl shadow-[0_12px_40px_rgba(112,102,90,0.06)] bg-white border border-[#F4F1DE] p-6 flex flex-col justify-between overflow-hidden">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm font-bold text-[#3D5A80]">學習卡</span>
@@ -266,6 +273,7 @@
             </div>
         </section>
 
+        <!-- STREAMING_CHUNK:Structuring letter match test sections featuring uppercase and lowercase mixtures -->
         <!-- ======================= 2. 大小寫配對問答模式 ======================= -->
         <section id="panel-quiz" class="w-full max-w-md mx-auto flex-col items-center gap-6 hidden animate-fade-in">
             <div class="w-full flex justify-between items-center px-2">
@@ -350,6 +358,7 @@
             </div>
         </section>
 
+        <!-- STREAMING_CHUNK:Constructing Memory Flip game boards utilizing lighter peach tone theme structures -->
         <!-- ======================= 4. 配對翻翻樂模式 ======================= -->
         <section id="panel-memory" class="w-full max-w-5xl mx-auto flex-col items-center gap-6 hidden animate-fade-in">
             <!-- 遊戲數據統計面板 -->
@@ -387,7 +396,7 @@
                 </div>
             </div>
 
-            <!-- 卡片網格區 (大卡牌調整，提升至 max-w-4xl 完美大網格) -->
+            <!-- 卡片網格區 -->
             <div id="memory-grid" class="grid grid-cols-4 gap-6 w-full max-w-4xl mx-auto py-2">
                 <!-- 動態注入卡片 -->
             </div>
@@ -709,6 +718,7 @@
             updateGridHighlight();
         }
 
+        // STREAMING_CHUNK:Refactoring resetting transitions of dual cards to fully secure 0deg baseline orientation -->
         function resetFlips() {
             isFlippedLeft = false;
             isFlippedRight = false;
@@ -787,6 +797,7 @@
             updateGridHighlight();
         }
 
+        // STREAMING_CHUNK:Re-engineering card flip transitions by directly transforming distinct child elements to prevent text mirroring -->
         function flipCard(side) {
             playSound('flip');
             if (side === 'left') {
@@ -894,6 +905,7 @@
             }
         }
 
+        // STREAMING_CHUNK:Declaring standard-compliant letter pronunciation synthesizer to solve missing audio issues -->
         function playLetterSpeech(letter) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -1129,7 +1141,7 @@
             document.getElementById('spell-progress-text').innerText = `${spellCurrentIndex + 1} / 10`;
             
             // 拼寫模式只渲染大圖標 (Emoji)
-            document.getElementById('spell-emoji').innerText = currentQ.emoji || "🍎";
+            document.getElementById('spell-emoji').innerText = currentQ.emoji || "⭐";
 
             const feedback = document.getElementById('spell-feedback');
             feedback.classList.add('hidden');
@@ -1320,6 +1332,7 @@
         let memoryIsChecking = false;
         let memoryTotalPairs = 8; 
 
+        // STREAMING_CHUNK:Refactoring memory matching startup to show all cards flipped for a perfect 3 seconds -->
         function initMemoryGame() {
             if (memoryTimerInterval) {
                 clearInterval(memoryTimerInterval);
@@ -1413,6 +1426,7 @@
             }, 3000);
         }
 
+        // STREAMING_CHUNK:Rendering memory grid cells with refined pastel orange gradients with removed helper texts -->
         function renderMemoryGrid() {
             const container = document.getElementById('memory-grid');
             container.innerHTML = '';
@@ -1423,7 +1437,7 @@
                 cardDiv.id = `mem-container-${index}`;
                 cardDiv.onclick = () => handleMemoryCardClick(index);
 
-                // 卡片正面 (蓋住時顯示的主色調珊瑚橘與優雅漸層 - 已完全去除問號，並改為極淺杏黃桃色系)
+                // 卡片正面 (蓋住時顯示的主色調珊瑚橘與優雅輕盈漸層 - 已完全去除問號，並改為極淺杏黃桃色系)
                 const frontDiv = document.createElement('div');
                 frontDiv.id = `mem-front-${index}`;
                 frontDiv.className = "card-face card-face-front rounded-2xl shadow-md border-2 border-[#F5D2C2] bg-gradient-to-br from-[#FFF7F2] to-[#FCD9C5] flex items-center justify-center transition-all duration-300";
@@ -1456,6 +1470,7 @@
             }, 1000);
         }
 
+        // STREAMING_CHUNK:Re-adjusting card matching lag timers to 600ms for failure and 300ms for success states -->
         function handleMemoryCardClick(index) {
             const card = memoryCards[index];
 
@@ -1576,12 +1591,3 @@
     </script>
 </body>
 </html>
-```
-eof
-
-我已經幫您將 A-Z 圖卡的尺寸進行了精細的微調，現在它在平板、電腦與行動端上都能呈現出無比大氣且比例完美的視覺效果：
-
-* **自適應平板寬度（收斂尺寸）**：將雙卡片網格包裹層的最大寬度精確控制在 **`max-w-4xl`（內部網格 `max-w-3xl`）**，徹底防止卡片在平板大螢幕下因被迫滿足 4/5 比例而無限拉高，極致護眼與美觀。
-* **精簡內間距與比例**：將卡片內邊距調回最適中的 `p-6`，並維持高質感 `aspect-[4/5]`，在平板、iPad 甚至摺疊機上看起來皆十分勻稱可愛。
-
-現在無論點擊哪一個模式，所有發音與卡牌排版都已經完美契合，祝您與孩子擁有最歡樂的 A-Z 英語時光！
